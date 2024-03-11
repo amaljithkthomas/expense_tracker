@@ -12,25 +12,54 @@ class Expense extends StatefulWidget {
 class _ExpenseState extends State<Expense> {
   void _showExpenseBottomSheet() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
-      builder: (context1) => const NewExpense(),
+      builder: (context1) => NewExpense(
+        addData: addExpenseData,
+      ),
     );
   }
 
-  final List<ExpenseModel> expenseList = [
-    ExpenseModel(
-      title: 'Flutter Course',
-      date: DateTime.now(),
-      amount: 22000,
-      category: Category.work,
-    ),
-    ExpenseModel(
-      title: 'Cinema',
-      date: DateTime.now(),
-      amount: 360,
-      category: Category.leisure,
-    ),
-  ];
+  final List<ExpenseModel> expenseList = [];
+
+  void addExpenseData({required ExpenseModel expenseModel
+      // required String title,
+      // required DateTime date,
+      // required double amount,
+      // required Category category,
+      }) {
+    expenseList.add(
+        // ExpenseModel(
+        //   title: title,
+        //   date: date,
+        //   amount: amount,
+        //   category: category,
+        // ),
+        expenseModel);
+    setState(() {});
+  }
+
+  void deleteItem({required ExpenseModel expenseModel}) {
+    final index = expenseList.indexOf(expenseModel);
+
+    setState(() {
+      expenseList.remove(expenseModel);
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 4),
+        action: SnackBarAction(
+            label: 'undo',
+            onPressed: () {
+              setState(() {
+                expenseList.insert(index, expenseModel);
+              });
+            }),
+        content: const Text('Expense deleted'),
+      ),
+    );
+  }
+
   @override
   Widget build(context) {
     return Scaffold(
@@ -53,7 +82,14 @@ class _ExpenseState extends State<Expense> {
         children: [
           const Text('Chart'),
           Expanded(
-            child: ExpenseList(expenseList: expenseList),
+            child: expenseList.isEmpty
+                ? const Center(
+                    child: Text('No Expense Data'),
+                  )
+                : ExpenseList(
+                    expenseList: expenseList,
+                    deleteItem: deleteItem,
+                  ),
           ),
         ],
       ),

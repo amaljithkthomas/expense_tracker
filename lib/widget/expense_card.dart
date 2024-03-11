@@ -18,8 +18,12 @@ class ExpenseCard extends StatelessWidget {
           vertical: 8,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(expenseData.title),
+            Text(
+              expenseData.title,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(
               height: 8,
             ),
