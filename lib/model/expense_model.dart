@@ -69,7 +69,7 @@ class ExpenseBucket {
     for (final item in expenses) {
       sum = sum + item.amount;
     }
-    print(sum);
+
     return sum;
   }
 }
