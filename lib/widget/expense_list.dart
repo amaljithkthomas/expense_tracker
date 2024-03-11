@@ -14,8 +14,23 @@ class ExpenseList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return ListView.builder(
       itemBuilder: (context, index) => Dismissible(
+        background: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ColoredBox(
+            color: theme.colorScheme.error,
+            child: Center(
+              child: Text(
+                'Delete',
+                style: theme.textTheme.titleLarge?.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
         onDismissed: (direction) {
           deleteItem(expenseModel: expenseList[index]);
         },

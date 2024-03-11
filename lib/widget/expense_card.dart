@@ -11,6 +11,7 @@ class ExpenseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Card(
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -22,7 +23,7 @@ class ExpenseCard extends StatelessWidget {
           children: [
             Text(
               expenseData.title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: theme.textTheme.titleLarge,
             ),
             const SizedBox(
               height: 8,

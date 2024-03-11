@@ -1,3 +1,4 @@
+import 'package:expense_tracker/widget/chart.dart';
 import 'package:expense_tracker/widget/expense_list.dart';
 import 'package:expense_tracker/model/expense_model.dart';
 import 'package:expense_tracker/widget/new_expense.dart';
@@ -45,6 +46,7 @@ class _ExpenseState extends State<Expense> {
     setState(() {
       expenseList.remove(expenseModel);
     });
+    ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 4),
@@ -66,10 +68,10 @@ class _ExpenseState extends State<Expense> {
       appBar: AppBar(
         title: const Text(
           'Expense Tracker',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
+          // style: TextStyle(
+          //   fontWeight: FontWeight.bold,
+          //   fontSize: 16,
+          // ),
         ),
         actions: [
           IconButton(
@@ -80,7 +82,7 @@ class _ExpenseState extends State<Expense> {
       ),
       body: Column(
         children: [
-          const Text('Chart'),
+          Chart(expenses: expenseList),
           Expanded(
             child: expenseList.isEmpty
                 ? const Center(
