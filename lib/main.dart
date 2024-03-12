@@ -2,6 +2,7 @@ import 'package:expense_tracker/constants.dart';
 import 'package:expense_tracker/expenses.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter/services.dart';
+import 'package:expense_tracker/key/key.dart';
 
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
             ),
       ),
       themeMode: ThemeMode.system,
-      home: const Expense(),
+      home: const KeyTest(),
     );
   }
 }
